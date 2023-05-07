@@ -1,8 +1,9 @@
-import { AuthService } from './auth.service';
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { map } from 'rxjs/operators';
+import { CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,6 @@ export class AuthGaurd implements CanActivate {
     // remove the subscription later
 
     return this.auth.appUser$.pipe(map((result)=>{
-      console.log(result);
       if(result){
         return true
       }else{
@@ -27,57 +27,5 @@ export class AuthGaurd implements CanActivate {
       return false;
     })
     )
-
-
   }
-
 }
-
-
-   // console.log(this.auth.kareme)
-    // if(this.auth.kareme == "done"){
-    //     return true;
-    // }else{
-    //   this.router.navigate(['/login'])
-    //   return false;
-    // }
-
-
-
-
-
-//-------------------------------------------code adeem------------------------------------
-
-
-
-
-
-// constructor(private auth: AuthService, private router: Router) { }
-
-// canActivate(route, state:RouterStateSnapshot): boolean{
-
-//   if(this.auth.user){
-//     return true;
-//   }else{
-//     //el queryParams de 3shan law el user 7ab ye8ayar el url, fa howa yeraga3o lel login w ye2olo kman
-//     //el 3enwan el 8alat ely kan nawy yeda5alo
-
-//     this.router.navigate(['/login'],{queryParams:{returnUrl: state.url}})
-//     return false
-//   }
-
-// }
-
-
-
-
-// console.log("The user logged status == >" + this.auth.isLoggedIn())
-
-// if(this.auth.isLoggedIn()){
-//   return true
-// }else{
-
-//   //we use queryParams for sending any optional parameters
-//   this.router.navigate(['/login'],{queryParams: {returnUrl: state.url}})
-//   return false;
-// }
