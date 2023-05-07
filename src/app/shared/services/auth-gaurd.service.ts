@@ -11,28 +11,17 @@ export class AuthGaurd implements CanActivate {
 
   constructor(private auth:AuthService, private router: Router){}
 
-
-//we can get the url that the user try to access
-//when the auth gaurd kicked in
-
-
-//Observable<boolean>
   canActivate(route, state:RouterStateSnapshot): Observable<boolean>{
 
     // we going to transform this observable from a user object into a observable of boolean
     // and angular will internally subscribe to this observable and then
     // remove the subscription later
 
-    console.log("hello kareem, here are the results of the firebase user data")
-
     return this.auth.appUser$.pipe(map((result)=>{
       console.log(result);
       if(result){
-        console.log("yes you can go to the page")
-        console.log(state.url);
         return true
       }else{
-        console.log("User is not found ya m3lem")
         this.router.navigate(['/login'], {queryParams: {returnUrl: state.url}})
       }
       return false;

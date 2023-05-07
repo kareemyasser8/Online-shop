@@ -44,15 +44,12 @@ export class AuthService {
 
   login(){
     let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/'
-    console.log("return Url : " + returnUrl)
     localStorage.setItem('returnUrl',returnUrl)
-    // localStorage.setItem('returnUrl',returnUrl)
     signInWithRedirect(this.afAuth, provider)
   }
 
   logout(){
     this.afAuth.signOut().then(()=>{
-      console.log("The user is logged out");
       this.router.navigate([''])
     });
   }

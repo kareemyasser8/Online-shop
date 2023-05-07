@@ -1,8 +1,9 @@
-import { map, Observable } from 'rxjs';
-import { ShoppingCartService } from './shopping-cart.service';
-import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/compat/database';
 import { Injectable } from '@angular/core';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
+import { map, Observable } from 'rxjs';
+
 import { Order } from '../models/order';
+import { ShoppingCartService } from './shopping-cart.service';
 
 @Injectable({
   providedIn: 'root'
@@ -24,11 +25,6 @@ export class OrderService {
     );
   }
 
-  // query: {
-  //   orderByChild: 'userId',
-  //   equalTo: userId
-  // }
-
   getOrdersByUser(userId: string) {
     return this.db.list('/orders', ref=>
        ref.orderByChild('userId').equalTo(userId)
@@ -43,7 +39,6 @@ export class OrderService {
       )
     );
   }
-
 
   async placeOrder(order: any){
     let result = await this.db.list('/orders').push(order);
