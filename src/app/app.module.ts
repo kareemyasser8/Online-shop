@@ -6,7 +6,7 @@ import { getDatabase, provideDatabase } from '@angular/fire/database';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { environment } from '../environments/environment';
+import { environment } from 'src/environments/environment.prod';
 import { AdminModule } from './admin/admin/admin.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
