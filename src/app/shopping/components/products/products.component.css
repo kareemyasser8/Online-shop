@@ -1,0 +1,27 @@
+@media screen and (max-width: 700px) {
+  .row{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    /* padding-top: 15%; */
+    /* border: 1px solid red; */
+  }
+
+  .sticky-top{
+    margin-bottom: 20px;
+    top:8%;
+  }
+
+  .col-12{
+    background-color: white;
+    padding-top: 20px;
+    height: max-content;
+    /* border: 1px solid red; */
+    display: block;
+    z-index: 1;
+    /* position: fixed; */
+  }
+}
+
+
