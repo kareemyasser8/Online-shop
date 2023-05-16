@@ -18,43 +18,44 @@ export class AuthService {
 
   afAuth: Auth;
   appUser: AppUser
-  fireBaseUser$ = new Subject<UserInfo>()  //Firebase User
+  fireBaseUser$ = new BehaviorSubject<UserInfo>(null)  //Firebase User
 
   constructor(private userService: UserService,
     private afApp: FirebaseApp,
     private router: Router,
-     private route: ActivatedRoute){
+    private route: ActivatedRoute) {
 
     this.afAuth = getAuth(this.afApp);
-    this.fireBaseUser$ = new BehaviorSubject(null);
 
-    this.afAuth.onAuthStateChanged((x)=>{
-        this.fireBaseUser$.next(x);
+    this.afAuth.onAuthStateChanged((x) => {
+      this.fireBaseUser$.next(x);
+    }, (err) => {
+      console.log(err);
     })
   }
 
-  login(){
+  login() {
     let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/'
-    localStorage.setItem('returnUrl',returnUrl)
+    localStorage.setItem('returnUrl', returnUrl)
     signInWithRedirect(this.afAuth, provider)
   }
 
-  logout(){
-    this.afAuth.signOut().then(()=>{
+  logout() {
+    this.afAuth.signOut().then(() => {
       this.router.navigate([''])
     });
   }
 
 
- get appUser$(): Observable<AppUser>{
+  get appUser$(): Observable<AppUser> {
 
-  return this.fireBaseUser$.asObservable()
-  .pipe( switchMap((user)=>
-   { if(user){
-     return this.userService.get(user.uid).valueChanges()
-    }
-    else return of(null)
+    return this.fireBaseUser$.asObservable()
+      .pipe(switchMap((user) => {
+        if (user) {
+          return this.userService.get(user.uid).valueChanges()
+        }
+        else return of(null)
+      }
+      ))
   }
-    ))
- }
 }

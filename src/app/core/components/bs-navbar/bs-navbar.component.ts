@@ -29,6 +29,12 @@ export class BsNavbarComponent implements OnInit {
   async ngOnInit() {
     this.auth.appUser$.subscribe(appUser => this.appUser = appUser)
     this.cart$ = (await this.shoppingCartService.getCart())
+    const toggleButton = document.querySelector('.navbar-toggler');
+
+    toggleButton.addEventListener('click', function () {
+      const isExpanded = this.getAttribute('aria-expanded') === 'true';
+      console.log(`Toggle button is ${isExpanded ? 'expanded' : 'collapsed'}.`);
+    });
   }
 
   logout() {
