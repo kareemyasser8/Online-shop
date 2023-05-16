@@ -1,0 +1,10 @@
+.row{
+  margin: 0px;
+  width: 100%;
+}
+
+.col-2{
+  width:max-content;
+  padding: 0px;
+  /* border: 1px solid red; */
+}
