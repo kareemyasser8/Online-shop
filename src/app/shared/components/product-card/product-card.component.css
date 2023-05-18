@@ -9,4 +9,6 @@
 
 .card-footer button{
   cursor: pointer;
+  background-color: rgb(10, 122, 122);
+  border: none;
 }

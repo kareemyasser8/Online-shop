@@ -8,3 +8,9 @@
   padding: 0px;
   /* border: 1px solid red; */
 }
+
+.col-2 button{
+  cursor: pointer;
+  background-color: rgb(10, 122, 122);
+  border: none;
+}
